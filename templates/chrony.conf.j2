@@ -9,12 +9,16 @@ port {{ chrony_port }}
 acquisitionport {{ chrony_acquisitionport }}
 {% endif %}
 
-{% if chrony_pool %}
-pool {{ chrony_pool }}
+{% if chrony_pools %}
+{% for pool in (chrony_pools if chrony_pools is not string else [chrony_pools]) %}
+pool {{ pool }}
+{% endfor %}
 {% endif %}
 
-{% if chrony_server %}
-server {{ chrony_server }}
+{% if chrony_servers %}
+{% for server in (chrony_servers if chrony_servers is not string else [chrony_servers]) %}
+server {{ server }}
+{% endfor %}
 {% endif %}
 
 keyfile {{ chrony_keyfile }}
